@@ -5,7 +5,11 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 const ProductCard = ({ product, onClick }) => {
     return (
         <TouchableOpacity style={styles.card} onPress={onClick}>
-            <Image source={{ uri: product.image }} style={styles.image} />
+            <Image 
+                source={{ uri: product.image }} 
+                style={styles.image} 
+                resizeMode="cover" 
+            />
             <Text style={styles.name}>{product.name}</Text>
             <Text style={styles.price}>${product.price}</Text>
         </TouchableOpacity>
@@ -25,24 +29,28 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.2,
         shadowRadius: 6,
-        elevation: 5, // Para Android
+        elevation: 5,
+        width: 120, // Ancho de la tarjeta
+        height: 150, // Establece la altura deseada
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     image: {
         width: '100%',
-        height: 150, // Aumentar altura
+        height: 80, // Ajustar la altura de la imagen
         borderRadius: 10,
-        marginBottom: 10, // Agregar margen inferior
+        marginBottom: 5, // Espaciado entre la imagen y el texto
     },
     name: {
         fontWeight: 'bold',
-        fontSize: 18, // Aumentar tamaño
-        marginVertical: 5,
-        textAlign: 'center', // Centrar el texto
+        fontSize: 16,
+        marginVertical: 2,
+        textAlign: 'center',
     },
     price: {
-        fontWeight: 'bold', // Hacerlo más destacado
+        fontWeight: 'bold',
         color: 'green',
-        fontSize: 16, // Aumentar tamaño
+        fontSize: 14,
     },
 });
 
