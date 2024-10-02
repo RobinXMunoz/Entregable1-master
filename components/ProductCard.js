@@ -1,6 +1,6 @@
 // components/ProductCard.js
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
 const ProductCard = ({ product, onClick }) => {
     return (
@@ -25,24 +25,23 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.2,
         shadowRadius: 6,
-        elevation: 5, // Para Android
+        elevation: 5,
+        width: 120,
+        height: 150,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     image: {
         width: '100%',
-        height: 150, // Aumentar altura
+        height: 100,
         borderRadius: 10,
-        marginBottom: 10, // Agregar margen inferior
     },
     name: {
         fontWeight: 'bold',
-        fontSize: 18, // Aumentar tamaño
-        marginVertical: 5,
-        textAlign: 'center', // Centrar el texto
+        textAlign: 'center',
     },
     price: {
-        fontWeight: 'bold', // Hacerlo más destacado
         color: 'green',
-        fontSize: 16, // Aumentar tamaño
     },
 });
 

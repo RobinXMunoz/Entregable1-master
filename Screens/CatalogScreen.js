@@ -11,6 +11,7 @@ const products = [
         name: 'Cerveza', 
         price: 10, 
         image: 'https://images.unsplash.com/photo-1618885472179-5e474019f2a9?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2VydmV6YXxlbnwwfHwwfHx8MA%3D%3D' 
+        
     },
     { 
         id: '2', 
@@ -58,7 +59,7 @@ const CatalogScreen = ({ navigation }) => {
                 keyExtractor={(item) => item.id} // Clave única para cada ítem
                 horizontal={true}         // Mostrar en horizontal
                 showsHorizontalScrollIndicator={false} // Ocultar la barra de desplazamiento horizontal
-                contentContainerStyle={{ paddingHorizontal: 10 }} // Agregar espaciado horizontal
+                contentContainerStyle={{ paddingHorizontal: 10}} // Agregar espaciado horizontal
             />
         </View>
     );
