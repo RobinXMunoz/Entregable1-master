@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+// screens/CatalogScreen.js
+>>>>>>> 0b5eacf055c920b25c7a2eaa8747dff5ffb43b60
 import React from 'react';
 import { View, Dimensions, FlatList } from 'react-native';
 import ProductCard from '../components/ProductCard';
@@ -10,6 +14,10 @@ const products = [
         name: 'Cerveza', 
         price: 10, 
         image: 'https://images.unsplash.com/photo-1618885472179-5e474019f2a9?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8Y2VydmV6YXxlbnwwfHwwfHx8MA%3D%3D' 
+<<<<<<< HEAD
+=======
+        
+>>>>>>> 0b5eacf055c920b25c7a2eaa8747dff5ffb43b60
     },
     { 
         id: '2', 
@@ -45,11 +53,15 @@ const CatalogScreen = ({ navigation }) => {
     const renderItem = ({ item }) => (
         <ProductCard 
             product={item} 
+<<<<<<< HEAD
             onClick={() => navigation.navigate('ProductDetail', { 
                 product: item, 
                 products: products, // Pasar la lista de productos
                 index: products.indexOf(item) // Pasar el índice del producto actual
             })}  
+=======
+            onClick={() => navigation.navigate('ProductDetail', { productId: item.id })} 
+>>>>>>> 0b5eacf055c920b25c7a2eaa8747dff5ffb43b60
         />
     );
 

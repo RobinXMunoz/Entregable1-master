@@ -41,7 +41,6 @@ const ProductDetailScreen = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         padding: 20,
         alignItems: 'center',
     },
@@ -66,9 +65,10 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     image: {
-        width: 200,
+        width: '100%',
         height: 200,
         borderRadius: 10,
+        marginBottom: 10,
     },
     name: {
         fontSize: 24,
@@ -78,7 +78,13 @@ const styles = StyleSheet.create({
     price: {
         fontSize: 20,
         color: 'green',
-        marginVertical: 10,
+        marginBottom: 10,
+    },
+    description: {
+        fontSize: 16,
+        textAlign: 'center',
+        marginTop: 10,
+        color: '#333',
     },
 });
 
