@@ -32,14 +32,14 @@ const styles = StyleSheet.create({
         elevation: 5,
         width: 120,
         height: 150,
-        width: 120, // Ancho de la tarjeta
-        height: 150, // Establece la altura desead
+        width: 200, // Ancho de la tarjeta
+        height: 250, // Establece la altura desead
         alignItems: 'center',
         justifyContent: 'center',
     },
     image: {
-        width: '100%',
-        height: 100,
+        width: '90%',
+        height: 200,
         borderRadius: 10,
     },
     name: {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';  // Importar Ionicons para las flechas
 
 const ProductDetailScreen = ({ route, navigation }) => {
     const { product, products, index } = route.params;
@@ -19,12 +20,24 @@ const ProductDetailScreen = ({ route, navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
+                {/* Flecha hacia atrás */}
                 <TouchableOpacity onPress={handlePrevProduct} disabled={index === 0}>
-                    <Text style={[styles.arrow, index === 0 && styles.disabledArrow]}>&lt;-</Text> {/* Flecha hacia atrás */}
+                    <Ionicons 
+                        name="arrow-back-circle"  // Ícono de flecha hacia atrás
+                        size={50} 
+                        color={index === 0 ? "gray" : "#800020"}  // Color dependiendo de si está habilitado o deshabilitado
+                        style={index === 0 && styles.disabledArrow}
+                    />
                 </TouchableOpacity>
-                <Text style={styles.title}>Detalles del Producto</Text>
+
+                {/* Flecha hacia adelante */}
                 <TouchableOpacity onPress={handleNextProduct} disabled={index === products.length - 1}>
-                    <Text style={[styles.arrow, index === products.length - 1 && styles.disabledArrow]}>{'->'}</Text> {/* Flecha hacia adelante */}
+                    <Ionicons 
+                        name="arrow-forward-circle"  // Ícono de flecha hacia adelante
+                        size={50} 
+                        color={index === products.length - 1 ? "gray" : "#800020"}  // Color dependiendo de si está habilitado o deshabilitado
+                        style={index === products.length - 1 && styles.disabledArrow}
+                    />
                 </TouchableOpacity>
             </View>
 
@@ -41,6 +54,7 @@ const ProductDetailScreen = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         padding: 20,
         alignItems: 'center',
     },
@@ -51,24 +65,13 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingVertical: 10,
     },
-    arrow: {
-        fontSize: 24,
-        paddingHorizontal: 10,
-    },
     disabledArrow: {
-        color: 'gray',
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        flex: 1,
-        textAlign: 'center',
+        opacity: 0.5,  // Disminuir la opacidad si está deshabilitado
     },
     image: {
-        width: '100%',
+        width: 200,
         height: 200,
         borderRadius: 10,
-        marginBottom: 10,
     },
     name: {
         fontSize: 24,
@@ -78,13 +81,7 @@ const styles = StyleSheet.create({
     price: {
         fontSize: 20,
         color: 'green',
-        marginBottom: 10,
-    },
-    description: {
-        fontSize: 16,
-        textAlign: 'center',
-        marginTop: 10,
-        color: '#333',
+        marginVertical: 10,
     },
 });
 

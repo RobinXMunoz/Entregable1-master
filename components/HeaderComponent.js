@@ -13,12 +13,12 @@ const HeaderComponent = ({ title }) => {
 const styles = StyleSheet.create({
     header: {
         backgroundColor: '#6200EE', // Cambia esto al color deseado
-        padding: 20,
+        padding: 10,
         alignItems: 'center',
     },
     headerTitle: {
         color: 'white',
-        fontSize: 24,
+        fontSize: 0,
         fontWeight: 'bold',
     },
 });
