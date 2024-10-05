@@ -1,88 +1,86 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';  // Importar Ionicons para las flechas
+import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
+import globalStyles from '../styles/globalStyles';
 
-const ProductDetailScreen = ({ route, navigation }) => {
-    const { product, products, index } = route.params;
+const ProductDetail = ({ route, navigation }) => {
+    const { product } = route.params;
+    const [loading, setLoading] = React.useState(true);
 
-    const handlePrevProduct = () => {
-        if (index > 0) {
-            navigation.navigate('ProductDetail', { product: products[index - 1], products, index: index - 1 });
-        }
-    };
-
-    const handleNextProduct = () => {
-        if (index < products.length - 1) {
-            navigation.navigate('ProductDetail', { product: products[index + 1], products, index: index + 1 });
-        }
+    const handleAddToCart = () => {
+        console.log('Agregado al carrito:', product);
     };
 
     return (
-        <View style={styles.container}>
-            <View style={styles.header}>
-                {/* Flecha hacia atrás */}
-                <TouchableOpacity onPress={handlePrevProduct} disabled={index === 0}>
-                    <Ionicons 
-                        name="arrow-back-circle"  // Ícono de flecha hacia atrás
-                        size={50} 
-                        color={index === 0 ? "gray" : "#800020"}  // Color dependiendo de si está habilitado o deshabilitado
-                        style={index === 0 && styles.disabledArrow}
-                    />
-                </TouchableOpacity>
-
-                {/* Flecha hacia adelante */}
-                <TouchableOpacity onPress={handleNextProduct} disabled={index === products.length - 1}>
-                    <Ionicons 
-                        name="arrow-forward-circle"  // Ícono de flecha hacia adelante
-                        size={50} 
-                        color={index === products.length - 1 ? "gray" : "#800020"}  // Color dependiendo de si está habilitado o deshabilitado
-                        style={index === products.length - 1 && styles.disabledArrow}
-                    />
-                </TouchableOpacity>
+        <View style={globalStyles.container}>
+            <View style={styles.imageContainer}>
+                {loading && <Text>Cargando imagen...</Text>}
+                <Image 
+                    source={{ uri: product.image }}
+                    style={styles.image} 
+                    resizeMode="contain"  // Ajuste para que la imagen se vea completamente
+                    onLoad={() => setLoading(false)}
+                    onError={() => {
+                        setLoading(false);
+                        console.log('Error al cargar la imagen');
+                    }}
+                />
             </View>
-
-            <Image 
-                source={{ uri: product.image }} 
-                style={styles.image} 
-                resizeMode="cover" 
-            />
             <Text style={styles.name}>{product.name}</Text>
             <Text style={styles.price}>${product.price}</Text>
+            <Text style={styles.description}>{product.description}</Text>
+            <Pressable style={styles.button} onPress={handleAddToCart}>
+                <Text style={styles.buttonText}>Agregar al carrito</Text>
+            </Pressable>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
+    imageContainer: {
         alignItems: 'center',
-    },
-    header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        width: '100%',
-        paddingVertical: 10,
-    },
-    disabledArrow: {
-        opacity: 0.5,  // Disminuir la opacidad si está deshabilitado
+        marginVertical: 20,
     },
     image: {
-        width: 200,
-        height: 200,
+        width: '100%',
+        height: 300,  // Ajusta este valor según tus necesidades
         borderRadius: 10,
     },
     name: {
-        fontSize: 24,
         fontWeight: 'bold',
+        fontSize: 24,
         marginVertical: 10,
+        textAlign: 'center',
     },
     price: {
+        fontWeight: 'bold',
+        color: '#581845',
         fontSize: 20,
-        color: 'green',
+        textAlign: 'center',
+        marginBottom: 10,
+    },
+    description: {
+        fontSize: 16,
+        color: '#333',
         marginVertical: 10,
+        paddingHorizontal: 20,
+        textAlign: 'center',
+    },
+    button: {
+        backgroundColor: '#670000',
+        borderRadius: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        marginTop: 20,
+        alignSelf: 'center',
+        shadowColor: '#000',
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+        shadowOffset: { width: 0, height: 2 },
+    },
+    buttonText: {
+        color: '#fff',
+        fontWeight: 'bold',
     },
 });
 
-export default ProductDetailScreen;
+export default ProductDetail;

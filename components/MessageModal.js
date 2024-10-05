@@ -27,10 +27,10 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        backgroundColor: '#900C3F',//vino tinto
     },
     modalContent: {
-        backgroundColor: 'white',
+        backgroundColor: '#900C3F',
         padding: 20,
         borderRadius: 10,
         alignItems: 'center',

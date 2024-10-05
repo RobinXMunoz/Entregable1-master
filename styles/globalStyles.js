@@ -7,24 +7,16 @@ const globalStyles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
+        backgroundColor: '#730000', // Color de fondo
     },
     title: {
         fontSize: 24,
         fontWeight: 'bold',
-        color: '#000', // Cambiado a negro
+        color: '#fff', // Cambiado a blanco
         textAlign: 'center',
     },
-    background: {
-        width: '100%', // Ajusta el porcentaje según necesites
-        height: '100%', // Ajusta el tamaño para que sea más pequeño
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignSelf: 'center', // Centra el componente en el medio
-    },
-    
-    
     button: {
-        backgroundColor: '#6200EE',
+        backgroundColor: '#6200EE', // Cambiar a tu color deseado
         padding: 10,
         borderRadius: 5,
         alignItems: 'center',
@@ -34,10 +26,22 @@ const globalStyles = StyleSheet.create({
         color: 'white',
         fontSize: 16,
     },
-    // Otros estilos...
+    productTitle: {
+        fontWeight: 'bold',
+        fontSize: 16,
+        marginVertical: 2,
+        textAlign: 'center',
+        color: '#610000', // Cambiado a blanco para el nombre del producto
+    },
+    price: {
+        fontWeight: 'bold',
+        color: 'green',
+        fontSize: 14,
+        marginBottom: 5,
+    },
+    cardBackground: {
+        backgroundColor: '#ffffff', // Cambiado a rojo oscuro para el fondo de la tarjeta
+    },
 });
 
 export default globalStyles;
-
-
-
