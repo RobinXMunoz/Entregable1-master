@@ -1,11 +1,26 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import TabNavigator from './TabNavigator'; // Asegúrate de que esta ruta es correcta
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import TabNavigator from './TabNavigator';
+import LoginScreen from '../Screens/LoginScreen';
+
+const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
     return (
         <NavigationContainer>
-            <TabNavigator />
+            <Stack.Navigator initialRouteName="Inicio de Sesión">
+                <Stack.Screen 
+                    name="Inicio de Sesión" 
+                    component={LoginScreen} 
+                    options={{ headerShown: false }}  // Ocultar el header en el login
+                />
+                <Stack.Screen 
+                    name="Home" 
+                    component={TabNavigator} 
+                    options={{ headerShown: false }} // Ocultar el header en el TabNavigator
+                />
+            </Stack.Navigator>
         </NavigationContainer>
     );
 };
