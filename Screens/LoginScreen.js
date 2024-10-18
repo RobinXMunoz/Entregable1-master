@@ -1,15 +1,20 @@
-import React, { useState } from 'react'; 
-import { View, TextInput, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import React, { useState, useContext } from 'react'; 
+import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'; 
+import { AuthContext } from '../context/auth-context'; // Importa el contexto de autenticación
 
 const LoginScreen = ({ navigation }) => {
+  const { login } = useContext(AuthContext); // Usar el contexto
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (email === 'proyecto@bebidas.com' && password === '123456') {
+      await AsyncStorage.setItem('userEmail', email);
+      login(email); // Llama a la función de login del contexto
       navigation.navigate('Home');  // Navega hacia la pantalla principal
     } else {
-      alert('Correo o contraseña incorrectos');
+      Alert.alert('Error', 'Correo o contraseña incorrectos');
     }
   };
 
@@ -30,6 +35,7 @@ const LoginScreen = ({ navigation }) => {
         onChangeText={setPassword}
         secureTextEntry
       />
+  
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Iniciar Sesión</Text>
       </TouchableOpacity>

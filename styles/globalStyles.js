@@ -42,6 +42,7 @@ const globalStyles = StyleSheet.create({
     cardBackground: {
         backgroundColor: '#ffffff', // Cambiado a rojo oscuro para el fondo de la tarjeta
     },
+   
 });
 
 export default globalStyles;
