@@ -2,20 +2,34 @@ import React, { useState, useContext } from 'react';
 import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
 import { AuthContext } from '../context/auth-context'; // Importa el contexto de autenticación
+import { login } from '../utils/auth-context';
 
 const LoginScreen = ({ navigation }) => {
-  const { login } = useContext(AuthContext); // Usar el contexto
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const authCtx = useContext(AuthContext);
 
   const handleLogin = async () => {
-    if (email === 'proyecto@bebidas.com' && password === '123456') {
-      await AsyncStorage.setItem('userEmail', email);
-      login(email); // Llama a la función de login del contexto
-      navigation.navigate('Home');  // Navega hacia la pantalla principal
-    } else {
-      Alert.alert('Error', 'Correo o contraseña incorrectos');
+    console.log("try")
+
+    try {
+      const token = await login(email, password); // llamamos la utilidad de autenticacion
+      // si esta autenticacion tiene exito devuelve un token. El que devuelve esto es firebase
+      //el cual le pasamos al contexto
+
+      authCtx.login(token); // el token se pasa al contexto de autenticacion y lo cargamos con la funcion de login
+      // (por dentro de un setAuthToken(token))
+
+      navigation.navigate('Home'); //si todo sale bien navegamos a la pantalla de MainTabs
+    } catch (error) {
+      Alert.alert('Error', 'Login failed. Please try again.');
     }
+   
+      // const token = 'fakeToken123'; // Generar o recibir el token
+      // await AsyncStorage.setItem('authToken', token); // Guardar el token en el almacenamiento local
+      // login(token); // Llama a la función de login del contexto
+      // navigation.navigate('Home');  // Navega hacia la pantalla principal
+   
   };
 
   return (
@@ -35,7 +49,6 @@ const LoginScreen = ({ navigation }) => {
         onChangeText={setPassword}
         secureTextEntry
       />
-  
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Iniciar Sesión</Text>
       </TouchableOpacity>
@@ -62,13 +75,13 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   button: {
-    backgroundColor: '#bb0000', // Color de fondo del botón
+    backgroundColor: '#bb0000',
     padding: 12,
     alignItems: 'center',
-    borderRadius: 5, // Bordes redondeados
+    borderRadius: 5,
   },
   buttonText: {
-    color: '#ffffff', // Color del texto del botón
+    color: '#ffffff',
     fontSize: 16,
   },
 });

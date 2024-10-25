@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import AppNavigator from './navigation/AppNavigator'; // Asegúrate de que esta ruta es correcta
-import { AuthProvider } from './context/auth-context'; // Importar el contexto
+import AppNavigator from './navigation/AppNavigator'; 
+import AuthContextProvider from './context/auth-context'; // Importar el nuevo contexto
 
 const App = () => {
   return (
-    <AuthProvider>
+    <AuthContextProvider>
       <View style={styles.container}>
         <AppNavigator />
       </View>
-    </AuthProvider>
+    </AuthContextProvider>
   );
 };
 

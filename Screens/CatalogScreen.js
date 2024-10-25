@@ -7,7 +7,7 @@ import globalStyles from '../styles/globalStyles';
 const products = [
     { 
         id: '1', 
-        name: 'Jugo Hit', 
+        name: 'Hit', 
         price: 10, 
         description: 'Un delicioso jugo de fruta natural',
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4KoMp8hC_ZfXwYZqFuMtAUeGxtNAr8q8vzg&s',
