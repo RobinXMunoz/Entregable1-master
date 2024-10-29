@@ -4,6 +4,7 @@ import AppNavigator from './navigation/AppNavigator';
 import AuthContextProvider from './context/auth-context'; // Importar el nuevo contexto
 
 const App = () => {
+  console.log("hola")
   return (
     <AuthContextProvider>
       <View style={styles.container}>

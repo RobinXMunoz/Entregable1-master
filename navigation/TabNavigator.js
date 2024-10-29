@@ -13,6 +13,7 @@ const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
+    console.log("Catalogo");
     return (
         <Stack.Navigator>
             <Stack.Screen 
