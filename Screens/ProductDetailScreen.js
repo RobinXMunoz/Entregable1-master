@@ -1,88 +1,70 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
-import globalStyles from '../styles/globalStyles';
-import addCompra from '../utils/post-data';
+import React, { useEffect, useState } from 'react';
+import { View, Text, Image, StyleSheet, Button } from 'react-native';
+import { getBebidas } from '../utils/Uploadbebidas'; // Asegúrate de que esta función esté disponible
 
-const ProductDetail = ({ route, navigation }) => {
-    const { product } = route.params;
-    const [loading, setLoading] = React.useState(true);
+const ProductDetailScreen = ({ route }) => {
+    const { productId, addToCart } = route.params; // Obtener el ID del producto y la función addToCart
+    const [product, setProduct] = useState(null);
+
+    useEffect(() => {
+        const fetchProduct = async () => {
+            const productsData = await getBebidas(); // Obtén los productos
+            const selectedProduct = productsData.find(item => item.id === productId); // Busca el producto por ID
+            setProduct(selectedProduct); // Establece el producto en el estado
+        };
+
+        fetchProduct();
+    }, [productId]);
 
     const handleAddToCart = () => {
-        console.log(product.id);
-        addCompra(product)
+        if (product) {
+            addToCart(product); // Llama a la función para agregar el producto al carrito
+            alert(`${product.name} agregado al carrito`); // Muestra un mensaje de confirmación
+        }
     };
 
+    if (!product) {
+        return <Text>Cargando...</Text>; // Muestra un mensaje mientras se carga el producto
+    }
+
     return (
-        <View style={globalStyles.container}>
-            <View style={styles.imageContainer}>
-                {loading && <Text>Cargando imagen...</Text>}
-                <Image 
-                    source={{ uri: product.image }}
-                    style={styles.image} 
-                    resizeMode="contain"  // Ajuste para que la imagen se vea completamente
-                    onLoad={() => setLoading(false)}
-                    onError={() => {
-                        setLoading(false);
-                        console.log('Error al cargar la imagen');
-                    }}
-                />
-            </View>
+        <View style={styles.container}>
+            <Image source={{ uri: product.image }} style={styles.image} />
             <Text style={styles.name}>{product.name}</Text>
-            <Text style={styles.price}>${product.price}</Text>
             <Text style={styles.description}>{product.description}</Text>
-            <Pressable style={styles.button} onPress={handleAddToCart}>
-                <Text style={styles.buttonText}>Agregar al carrito</Text>
-            </Pressable>
+            <Text style={styles.price}>${product.price}</Text>
+            <Button title="Agregar al carrito" onPress={handleAddToCart} /> {/* Botón para agregar al carrito */}
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    imageContainer: {
+    container: {
+        flex: 1,
         alignItems: 'center',
-        marginVertical: 20,
+        justifyContent: 'center',
+        padding: 16,
     },
     image: {
-        width: '100%',
-        height: 300,  // Ajusta este valor según tus necesidades
-        borderRadius: 10,
+        width: 200,
+        height: 200,
+        resizeMode: 'cover',
+        marginBottom: 16,
     },
     name: {
-        fontWeight: 'bold',
         fontSize: 24,
-        marginVertical: 10,
-        textAlign: 'center',
-    },
-    price: {
         fontWeight: 'bold',
-        color: '#581845',
-        fontSize: 20,
-        textAlign: 'center',
-        marginBottom: 10,
+        marginBottom: 8,
     },
     description: {
         fontSize: 16,
-        color: '#333',
-        marginVertical: 10,
-        paddingHorizontal: 20,
-        textAlign: 'center',
+        marginBottom: 8,
     },
-    button: {
-        backgroundColor: '#670000',
-        borderRadius: 10,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        marginTop: 20,
-        alignSelf: 'center',
-        shadowColor: '#000',
-        shadowOpacity: 0.2,
-        shadowRadius: 4,
-        shadowOffset: { width: 0, height: 2 },
-    },
-    buttonText: {
-        color: '#fff',
+    price: {
+        fontSize: 20,
         fontWeight: 'bold',
+        color: 'green',
     },
 });
 
-export default ProductDetail;
+export default ProductDetailScreen;
