@@ -15,11 +15,11 @@ console.log("Catalogo");
     useEffect(() => {
         async function fetchData() {
             const productsData = await getBebidas();
-            const categoriesData = await getCategories();
+            //const categoriesData = await getCategories();
             console.log("Productos:", productsData); // Verifica si se obtienen los productos
-            console.log("Categorías:", categoriesData); // Verifica si se obtienen las categorías
+            //console.log("Categorías:", categoriesData); // Verifica si se obtienen las categorías
             setProducts(productsData);
-            setCategories(categoriesData);
+            //setCategories(categoriesData);
             console.log(Products);
         }
         fetchData();

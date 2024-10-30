@@ -1,13 +1,15 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
 import globalStyles from '../styles/globalStyles';
+import addCompra from '../utils/post-data';
 
 const ProductDetail = ({ route, navigation }) => {
     const { product } = route.params;
     const [loading, setLoading] = React.useState(true);
 
     const handleAddToCart = () => {
-        console.log('Agregado al carrito:', product);
+        console.log(product.id);
+        addCompra(product)
     };
 
     return (
