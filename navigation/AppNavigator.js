@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import TabNavigator from './TabNavigator';
 import LoginScreen from '../Screens/LoginScreen';
 import { AuthContext } from '../context/auth-context';
-import { useContext } from 'react';
 
 const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
     const authCtx = useContext(AuthContext);  
+    console.log(authCtx);
+
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName={authCtx.isLoggedIn ? "Home" : "Inicio de Sesión"}>

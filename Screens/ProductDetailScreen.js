@@ -1,10 +1,17 @@
+//export default TabNavigator;  ProductDetailScreen: 
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, StyleSheet, Button } from 'react-native';
+import { View, Text, Image, StyleSheet, Button, Alert } from 'react-native';
 import { getBebidas } from '../utils/Uploadbebidas'; // Asegúrate de que esta función esté disponible
+import addCompra from '../utils/post-data'; // Asegúrate de que la función addCompra esté correctamente importada
+import AgregarFactura from '../utils/AgregarFactura';
+import { useContext } from 'react';
+import { AuthContext } from '../context/auth-context';
+import {utils} from '../utils/auth-context';
 
 const ProductDetailScreen = ({ route }) => {
     const { productId, addToCart } = route.params; // Obtener el ID del producto y la función addToCart
     const [product, setProduct] = useState(null);
+    const authCtx = useContext(AuthContext);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -16,12 +23,18 @@ const ProductDetailScreen = ({ route }) => {
         fetchProduct();
     }, [productId]);
 
-    const handleAddToCart = () => {
+    const handleAddToCart = async () => {
         if (product) {
-            addToCart(product); // Llama a la función para agregar el producto al carrito
-            alert(`${product.name} agregado al carrito`); // Muestra un mensaje de confirmación
+        
+            await addCompra(product); // Llama a la función para agregar el producto a Firebase
+            console.log(authCtx.token.userId)
+            await AgregarFactura(authCtx.token.userId, product.id)
+            Alert.alert(`${product.name} agregado al carrito`); // Usa backticks para la interpolación
+
         }
     };
+
+
 
     if (!product) {
         return <Text>Cargando...</Text>; // Muestra un mensaje mientras se carga el producto
@@ -33,7 +46,7 @@ const ProductDetailScreen = ({ route }) => {
             <Text style={styles.name}>{product.name}</Text>
             <Text style={styles.description}>{product.description}</Text>
             <Text style={styles.price}>${product.price}</Text>
-            <Button title="Agregar al carrito" onPress={handleAddToCart} /> {/* Botón para agregar al carrito */}
+            <Button title="Agregar al carrito" onPress={handleAddToCart} />
         </View>
     );
 };
