@@ -42,6 +42,8 @@ const CartScreen = () => {
     );
 
     return (
+
+        
         <View style={globalStyles.container}>
             <Text style={globalStyles.title}>Tu Carrito</Text>
             {compras.length > 0 ? (

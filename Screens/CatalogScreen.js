@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { View, Dimensions, FlatList, Text, TouchableOpacity } from 'react-native';
+import { View, Dimensions, FlatList, Text, TouchableOpacity, ImageBackground } from 'react-native';
 import ProductCard from '../components/ProductCard';
 import globalStyles from '../styles/globalStyles';
 import { getBebidas } from '../utils/Uploadbebidas';
 import { getCategories } from '../utils/Categories-data';
+
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -36,7 +37,7 @@ const CatalogScreen = ({ navigation }) => {
             style={{
                 padding: 10,
                 marginRight: 8,
-                backgroundColor: selectedCategory === item.id ? '#333' : '#ccc',
+                //backgroundColor: selectedCategory === item.id ? '#333' : '#ccc',
                 borderRadius: 20,
             }}
             onPress={() => setSelectedCategory(item.id)}
@@ -46,6 +47,15 @@ const CatalogScreen = ({ navigation }) => {
     );
 
     return (
+
+        <ImageBackground
+        source={require('../assets/Fondo.jpg')} // Asegúrate de que la imagen esté en la carpeta assets
+        style={{ flex: 1, width: '100%', justifyContent :'center'}}
+        resizeMode="cover"
+        
+    >
+    
+    
         <View style={globalStyles.container}>
             <FlatList
                 data={categories}
@@ -64,7 +74,8 @@ const CatalogScreen = ({ navigation }) => {
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={{ paddingHorizontal: 10 }}
             />
-        </View>
+             </View>
+             </ImageBackground>
     );
 };
 
