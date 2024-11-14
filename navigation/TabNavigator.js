@@ -19,7 +19,7 @@ const StackNavigator = () => {
             <Stack.Screen 
                 name="Catalog" 
                 component={CatalogScreen} 
-                options={{ title: 'Catálogo' }} 
+                options={{ title: 'Catálogo' ,headerShown: false}} 
             />
             <Stack.Screen 
                 name="ProductDetail" 
