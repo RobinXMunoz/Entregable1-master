@@ -1,6 +1,6 @@
 //export default TabNavigator;  ProductDetailScreen: 
 import React, { useEffect, useState } from 'react';
-import { View, Text, Image, StyleSheet, Button, Alert } from 'react-native';
+import { View, Text, Image, StyleSheet, Button, Alert, ScrollView } from 'react-native';
 import { getBebidas } from '../utils/Uploadbebidas'; // Asegúrate de que esta función esté disponible
 import addCompra from '../utils/post-data'; // Asegúrate de que la función addCompra esté correctamente importada
 import AgregarFactura from '../utils/AgregarFactura';
@@ -42,42 +42,87 @@ const ProductDetailScreen = ({ route }) => {
 
     return (
         <View style={styles.container}>
+            <ScrollView>
             <Image source={{ uri: product.image }} style={styles.image} />
-            <Text style={styles.name}>{product.name}</Text>
-            <Text style={styles.description}>{product.description}</Text>
-            <Text style={styles.price}>${product.price}</Text>
-            <Button title="Agregar al carrito" onPress={handleAddToCart} />
-        </View>
+            <View style={styles.detailsContainer}>
+                <Text style={styles.name}>{product.name}</Text>
+                <Text style={styles.description}>{product.description}</Text>
+                <Text style={styles.price}>${product.price}</Text>
+                <View style={styles.buttonContainer}>
+                    <Button title="Agregar al carrito" onPress={handleAddToCart} color="#670000" />
+                </View>
+            </View>
+
+            </ScrollView>
+    
+        </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
+        alignContent: "center",
+        justifyContent: "center",
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        flexDirection: "row",
+        backgroundColor: '#f5f5f5',
         padding: 16,
-        backgroundColor: '#f9f9f9',
     },
     image: {
+        alignSelf: "center",
         width: 200,
-        height: 200,
-        resizeMode: 'cover',
-        marginBottom: 16,
+        height: 300,
+        borderRadius: 15,
+        marginBottom: 20,
+        borderWidth: 2,
+        borderColor: '#670000',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.3,
+        shadowRadius: 10,
+    },
+    detailsContainer: {
+        backgroundColor: '#fff',
+        padding: 20,
+        borderRadius: 15,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.3,
+        shadowRadius: 10,
+        elevation: 5,
     },
     name: {
         fontSize: 24,
         fontWeight: 'bold',
-        marginBottom: 8,
+        color: '#333',
+        marginBottom: 10,
+        textAlign: 'center',
     },
     description: {
         fontSize: 16,
-        marginBottom: 8,
+        color: '#555',
+        marginBottom: 20,
+        lineHeight: 24,
+        textAlign: 'center',
     },
     price: {
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: 'bold',
-        color: 'green',
+        color: '#4CAF50',
+        marginBottom: 20,
+        textAlign: 'center',
+    },
+    buttonContainer: {
+        marginTop: 10,
+        borderRadius: 10,
+        overflow: 'hidden', // Asegura que el botón respete los bordes redondeados
+    },
+    loadingText: {
+        flex: 1,
+        fontSize: 18,
+        color: '#333',
+        textAlign: 'center',
+        marginTop: 20,
     },
 });
 
