@@ -8,22 +8,27 @@ import { AuthContext } from '../context/auth-context';
 const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
-    const authCtx = useContext(AuthContext);  
-    console.log(authCtx);
+    const authCtx = useContext(AuthContext);
 
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName={authCtx.isLoggedIn ? "Home" : "Inicio de Sesión"}>
-                <Stack.Screen 
-                    name="Inicio de Sesión" 
-                    component={LoginScreen} 
-                    options={{ headerShown: false }}  // Ocultar el header en el login
-                />
-                <Stack.Screen 
-                    name="Home" 
-                    component={TabNavigator} 
-                    options={{ headerShown: false }} // Ocultar el header en el TabNavigator
-                />
+            <Stack.Navigator initialRouteName={authCtx.isLoggedIn ? "Home" : "Login"}>
+                {/* Pantalla de inicio de sesión */}
+                {!authCtx.isLoggedIn && (
+                    <Stack.Screen 
+                        name="Login" 
+                        component={LoginScreen} 
+                        options={{ headerShown: false }} // Ocultar el header en el login
+                    />
+                )}
+                {/* Pantalla principal cuando el usuario está autenticado */}
+                {authCtx.isLoggedIn && (
+                    <Stack.Screen 
+                        name="Home" 
+                        component={TabNavigator} 
+                        options={{ headerShown: false }} // Ocultar el header en el TabNavigator
+                    />
+                )}
             </Stack.Navigator>
         </NavigationContainer>
     );

@@ -1,15 +1,17 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import AppNavigator from './navigation/AppNavigator'; 
-import AuthContextProvider from './context/auth-context'; // Importar el nuevo contexto
+import AppNavigator from './navigation/AppNavigator';
+import AuthContextProvider from './context/auth-context'; // Contexto de autenticación
+import CartProvider from './context/cart-context'; // Contexto de carrito
 
 const App = () => {
-  console.log("hola")
   return (
     <AuthContextProvider>
-      <View style={styles.container}>
-        <AppNavigator />
-      </View>
+      <CartProvider>
+        <View style={styles.container}>
+          <AppNavigator />
+        </View>
+      </CartProvider>
     </AuthContextProvider>
   );
 };
