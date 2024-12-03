@@ -1,7 +1,6 @@
 // screens/CartScreen.js
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Button, Alert } from 'react-native';
-import globalStyles from '../styles/globalStyles';
 import { addCompra } from '../utils/Compra-data';
 import { getCompras } from '../utils/getCompra';
 import { agregarFactura } from '../utils/factura'; // Asegúrate de que la ruta sea correcta

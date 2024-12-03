@@ -1,12 +1,12 @@
 // components/ButtonComponent.js
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { Pressable, Text, StyleSheet } from 'react-native';
 
 const ButtonComponent = ({ title, onClick }) => {
     return (
-        <TouchableOpacity style={styles.button} onPress={onClick}>
+        <Pressable style={styles.button} onPress={onClick}>
             <Text style={styles.buttonText}>{title}</Text>
-        </TouchableOpacity>
+        </Pressable>
     );
 };
 

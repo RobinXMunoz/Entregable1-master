@@ -1,10 +1,10 @@
 import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
-import globalStyles from '../styles/globalStyles'; // Asegúrate de que la ruta sea correcta
+import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
+
 
 const ProductCard = ({ product, onClick }) => {
     return (
-        <TouchableOpacity style={[styles.card, globalStyles.card]} onPress={onClick}>
+        <Pressable style={[styles.card, globalStyles.card]} onPress={onClick}>
             <Image 
                 source={{ uri: product.image }} 
                 style={styles.image} 
@@ -12,7 +12,7 @@ const ProductCard = ({ product, onClick }) => {
             />
             <Text style={styles.name}>{product.name}</Text>
             <Text style={styles.price}>${product.price}</Text>
-        </TouchableOpacity>
+        </Pressable>
     );
 };
 
@@ -23,11 +23,8 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         padding: 15,
         margin: 10,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 5 },
-        shadowOpacity: 0.3,
-        shadowRadius: 10,
-        elevation: 7,
+        boxShadow: '0px 5px 10px rgba(0, 0, 0, 0.3)', // Nuevo estilo de sombra
+        elevation: 7, // Mantén esto para Android
         width: 150, // Ancho de la tarjeta
         height: 230, // Establece la altura deseada
         alignItems: 'center',

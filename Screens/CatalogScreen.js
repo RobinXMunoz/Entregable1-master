@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Dimensions, FlatList, Text, TouchableOpacity, ImageBackground, ScrollView, StyleSheet, Image } from 'react-native';
 import ProductCard from '../components/ProductCard';
-import globalStyles from '../styles/globalStyles';
 import { getBebidas } from '../utils/Uploadbebidas';
 import { getCategories } from '../utils/Categories-data';
 
@@ -74,26 +73,6 @@ const CatalogScreen = ({ navigation }) => {
         </View>
       ))}
     </ScrollView>
-
-    //     <ImageBackground
-    //     source={require('../assets/Fondo.jpg')} // Asegúrate de que la imagen esté en la carpeta assets
-    //     style={{ flex: 1, width: '100%', justifyContent :'center'}}
-    //     resizeMode="cover"
-        
-    // >
-
-    //     <View style={globalStyles.container}>
-
-    //         <FlatList
-    //             data={products}
-    //             renderItem={renderProductItem}
-    //             keyExtractor={(item) => item.id}
-    //             horizontal={true}
-    //             showsHorizontalScrollIndicator={false}
-    //             contentContainerStyle={{ paddingHorizontal: 10 }}
-    //         />
-    //          </View>
-    //          </ImageBackground>
     );
 };
 
