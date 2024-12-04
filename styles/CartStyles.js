@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const CartScreenStyles = StyleSheet.create({
+const CartStyles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 16,
@@ -39,6 +39,21 @@ const CartScreenStyles = StyleSheet.create({
         borderRadius: 25,
         marginLeft: 10,
     },
+    buttonContainer: {
+        marginTop: 10,
+        borderRadius: 10,
+        overflow: 'hidden',
+        width: '20%', // Cambiar el ancho del botón según sea necesario
+        alignSelf: 'center', // Centrar el botón horizontalmente
+        backgroundColor: '#790000', // Fondo del botón
+        paddingVertical: 10, // Altura del botón
+    },
+    buttonText: {
+        color: '#fff', // Color del texto
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize: 16,
+    },
 });
 
-export default CartScreenStyles;
+export default CartStyles;

@@ -51,7 +51,7 @@ const ProductDetailScreen = ({ route }) => {
                     <Text style={ProductDetailScreenStyles.description}>{product.description}</Text>
                     <Text style={ProductDetailScreenStyles.price}>${product.price}</Text>
                     <View style={ProductDetailScreenStyles.buttonContainer}>
-                        <Button title="Agregar al carrito" onPress={handleAddToCart} color="#670000" />
+                        <Button title="Agregar al Carrito ➤" onPress={handleAddToCart} color="#670000" />
                     </View>
                 </View>
             </ScrollView>

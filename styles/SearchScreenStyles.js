@@ -6,13 +6,17 @@ const SearchScreenStyles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#fff',
   },
+  searchBarContainer: {
+    height: 60, // Ajusta la altura deseada aquí
+    justifyContent: 'center',
+    marginBottom: 16,
+  },
   searchInput: {
-    height: 40,
-    borderColor: '#ccc',
+    height: '100%',
+    borderColor: '#790000',
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
-    marginBottom: 16,
   },
   productItem: {
     flexDirection: 'row',
@@ -26,6 +30,8 @@ const SearchScreenStyles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 2,
+    borderWidth: 1, // Asegúrate de que haya un ancho de borde
+    borderColor: '#790000', // Cambia el color del borde aquí
   },
   productImage: {
     width: 60,

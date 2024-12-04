@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, TextInput, FlatList, Text, TouchableOpacity, Image } from 'react-native';
 import { ref, onValue } from 'firebase/database';
 import { database } from '../Firebase/firebase';
-import SearchScreenStyles from '../styles/SearchScreenStyles'; // Importar los estilos
+import SearchScreenStyles from '../styles/SearchScreenStyles'; // Importa los estilos
 
 const SearchScreen = ({ navigation }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [products, setProducts] = useState([]);
     const [filteredResults, setFilteredResults] = useState([]);
 
-    // Obtener productos desde Firebase Realtime Database
     useEffect(() => {
         const fetchProducts = () => {
             const productsRef = ref(database, 'products'); // Ruta en la base de datos
@@ -31,8 +30,7 @@ const SearchScreen = ({ navigation }) => {
         fetchProducts();
     }, []);
 
-    // Filtrar productos según la consulta de búsqueda
-    const handleSearch = (query) => {
+    const handleSearch = useCallback((query) => {
         setSearchQuery(query);
         if (query.trim() === '') {
             setFilteredResults(products); // Mostrar todos si no hay búsqueda
@@ -44,7 +42,7 @@ const SearchScreen = ({ navigation }) => {
             product.category.toLowerCase().includes(query.toLowerCase())
         );
         setFilteredResults(filtered);
-    };
+    }, [products]);
 
     const renderProductItem = ({ item }) => (
         <TouchableOpacity
@@ -61,12 +59,15 @@ const SearchScreen = ({ navigation }) => {
 
     return (
         <View style={SearchScreenStyles.container}>
-            <TextInput
-                style={SearchScreenStyles.searchInput}
-                placeholder="Buscar productos o categorías..."
-                value={searchQuery}
-                onChangeText={handleSearch}
-            />
+            <View style={SearchScreenStyles.searchBarContainer}>
+                <TextInput
+                    style={SearchScreenStyles.searchInput}
+                    placeholder="🔍︎ Buscar productos o categorías..." 
+                    placeholderTextColor="#a2a2a2" // Cambia el color del texto aquí
+                    value={searchQuery}
+                    onChangeText={handleSearch}
+                />
+            </View>
             <FlatList
                 data={filteredResults}
                 keyExtractor={(item) => item.id}

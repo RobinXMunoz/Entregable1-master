@@ -1,15 +1,15 @@
 import React, { useContext } from 'react'; 
-import { View, Text, FlatList, Button, Alert, Image } from 'react-native';
-import { agregarFactura } from '../utils/AgregarFactura'; // Asegúrate de que la ruta sea correcta
-import { CartContext } from '../context/cart-context'; // Importar el contexto del carrito
-import { AuthContext } from '../context/auth-context'; // Importar el contexto de autenticación
-import { useNavigation } from '@react-navigation/native';
-import CartScreenStyles from '../styles/CartScreenStyles'; // Importa los estilos
+import { View, Text, FlatList, Alert, Image, TouchableOpacity } from 'react-native'; 
+import { agregarFactura } from '../utils/AgregarFactura'; 
+import { CartContext } from '../context/cart-context'; 
+import { AuthContext } from '../context/auth-context'; 
+import { useNavigation } from '@react-navigation/native'; 
+import CartStyles from '../styles/CartStyles'; 
 
 const CartScreen = () => {
-    const { cartItems, clearCart } = useContext(CartContext); // Obtener los productos del carrito y función para vaciarlo
-    const { token } = useContext(AuthContext); // Obtener el token (usuario autenticado)
-    const Navigation = useNavigation();
+    const { cartItems, clearCart } = useContext(CartContext);  // Obtén los productos del carrito y la función para vaciarlo
+    const { token } = useContext(AuthContext);  // Obtén el token (usuario autenticado)
+    const navigation = useNavigation();  // Hook de navegación
 
     const handlePurchase = async () => {
         try {
@@ -23,14 +23,16 @@ const CartScreen = () => {
                 return;
             }
 
-            // Generar la factura en Firebase con el userId y los productos
+            // Generar la factura con los productos del carrito
             const productIds = cartItems.map((item) => item.id);
             await agregarFactura(token.userId, productIds);
 
-            // Mostrar éxito y limpiar el carrito
+            // Mostrar mensaje de éxito y limpiar el carrito
             Alert.alert("Compra exitosa", "Tu factura ha sido generada.");
             clearCart();
-            Navigation.navigate("Factura");
+
+            // Navegar a la pantalla de factura
+            navigation.navigate("FacturaScreen");  // Redirige a la pantalla de factura
 
         } catch (error) {
             console.error("Error al realizar la compra: ", error);
@@ -38,30 +40,32 @@ const CartScreen = () => {
         }
     };
 
-    const renderItem = (item) => {
-        console.log(item.image); // Verifica que la URL sea válida.
-        return (
-            <View style={CartScreenStyles.itemContainer}>
-                <Text style={CartScreenStyles.itemText}>{item.name}</Text>
-                <Text style={CartScreenStyles.itemPrice}>${item.price.toFixed(2)}</Text>
-                <Image source={{ uri: item.image }} style={CartScreenStyles.itemImage} />
-            </View>
-        );
-    };
+    const renderItem = ({ item }) => (
+        <View style={CartStyles.itemContainer}>
+            <Text style={CartStyles.itemText}>{item.name}</Text>
+            <Text style={CartStyles.itemPrice}>${item.price.toFixed(2)}</Text>
+            <Image source={{ uri: item.image }} style={CartStyles.itemImage} />
+        </View>
+    );
 
     return (
-        <View style={CartScreenStyles.container}>
-            <Text style={CartScreenStyles.title}>Tu Carrito</Text>
+        <View style={CartStyles.container}>
+            <Text style={CartStyles.title}>Tu Carrito</Text>
             {cartItems.length > 0 ? (
                 <FlatList
                     data={cartItems}
-                    renderItem={({ item }) => renderItem(item)}
+                    renderItem={renderItem}
                     keyExtractor={(item) => item.id.toString()}
                 />
             ) : (
-                <Text style={CartScreenStyles.emptyText}>No hay productos en tu carrito.</Text>
+                <Text style={CartStyles.emptyText}>No hay productos en tu carrito.</Text>
             )}
-            <Button title="Confirmar Compra" onPress={handlePurchase} />
+            <TouchableOpacity 
+                style={CartStyles.buttonContainer} 
+                onPress={handlePurchase}
+            >
+                <Text style={CartStyles.buttonText}>$ Confirmar Compra $</Text>
+            </TouchableOpacity>
         </View>
     );
 };

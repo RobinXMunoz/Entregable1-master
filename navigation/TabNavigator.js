@@ -17,15 +17,15 @@ const Stack = createNativeStackNavigator();
 const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen 
-        name="Catalogo" 
-        component={CatalogScreen} 
-        options={{ headerShown: false }} 
+      <Stack.Screen
+        name="Catalogo"
+        component={CatalogScreen}
+        options={{ headerShown: false }}
       />
-      <Stack.Screen 
-        name="ProductDetail" 
-        component={ProductDetailScreen} 
-        options={{ title: 'Detalles del Producto' }} 
+      <Stack.Screen
+        name="ProductDetail"
+        component={ProductDetailScreen}
+        options={{ title: 'Detalles del Producto' }}
       />
     </Stack.Navigator>
   );
@@ -50,36 +50,36 @@ const TabNavigator = () => {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-
         tabBarActiveTintColor: '#bb0000', // Color para los íconos activos
         tabBarInactiveTintColor: 'gray', // Color para los íconos inactivos
         tabBarStyle: TabNavigatorStyles.tabBarStyle, // Usamos los estilos del archivo TabNavigatorStyles
       })}
     >
       <Tab.Screen
-        name="Catalogo" 
-        component={StackNavigator} 
+        name="Catalogo"
+        component={StackNavigator}
         options={{ headerShown: false }}
       />
-      <Tab.Screen 
-        name="Buscador" 
-        component={SearchScreen} 
-        options={{ title: '' }} 
+      <Tab.Screen
+        name="Buscador"
+        component={SearchScreen}
+        options={{ title: '' }}
       />
-      <Tab.Screen 
-        name="Carrito" 
-        component={CartScreen} 
-        options={{ title: '' }} 
+      <Tab.Screen
+        name="Carrito"
+        component={CartScreen}
+        options={{ title: '' }}
       />
-      <Tab.Screen 
-        name="Perfil" 
-        component={ProfileScreen} 
-        options={{ title: '' }} 
+      <Tab.Screen
+        name="Perfil"
+        component={ProfileScreen}
+        options={{ title: '' }}
       />
-      <Tab.Screen 
-        name="Factura" 
-        component={FacturaScreen} 
-        options={{ title: '' }} 
+      {/* Pantalla de Factura */}
+      <Tab.Screen
+        name="Factura"
+        component={FacturaScreen}
+        options={{ title: '' }}
       />
     </Tab.Navigator>
   );

@@ -44,7 +44,7 @@ const ProfileScreen = () => {
         <Ionicons name="person-circle" size={100} color="#670000" /> {/* Icono de perfil */}
       </View>
       <Text style={ProfileScreenStyles.text}>{email}</Text> {/* Mostrar el correo */}
-      <Button title="Cerrar sesión" onPress={handleLogout} /> {/* Botón de cerrar sesión */}
+      <Button title="Cerrar Sesión ✘" onPress={handleLogout} color="#670000" /> {/* Botón de cerrar sesión */}
     </View>
   );
 };
