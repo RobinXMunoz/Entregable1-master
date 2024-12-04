@@ -9,6 +9,7 @@ import ProfileScreen from '../Screens/ProfileScreen';
 import SearchScreen from '../Screens/SearchScreen';
 import CartScreen from '../Screens/CartScreen';
 import FacturaScreen from '../Screens/FacturaScreen';
+import TabNavigatorStyles from '../styles/TabNavigatorStyles'; // Importa los estilos
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -52,12 +53,7 @@ const TabNavigator = () => {
 
         tabBarActiveTintColor: '#bb0000', // Color para los íconos activos
         tabBarInactiveTintColor: 'gray', // Color para los íconos inactivos
-        tabBarStyle: {
-         backgroundColor: '#fff', // Fondo de la barra de navegación
-         height: 60, // Altura de la barra
-         paddingBottom: 10, // Espaciado inferior de los íconos
-  },
-
+        tabBarStyle: TabNavigatorStyles.tabBarStyle, // Usamos los estilos del archivo TabNavigatorStyles
       })}
     >
       <Tab.Screen

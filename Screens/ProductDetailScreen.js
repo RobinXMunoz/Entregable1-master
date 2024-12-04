@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { View, Text, Image, StyleSheet, Button, Alert, ScrollView } from 'react-native';
+import { View, Text, Image, Button, Alert, ScrollView } from 'react-native';
 import { getBebidas } from '../utils/Uploadbebidas';
 import addCompra from '../utils/post-data';
 import AgregarFactura from '../utils/AgregarFactura';
 import { AuthContext } from '../context/auth-context';
 import { CartContext } from '../context/cart-context'; // Importar CartContext
+import ProductDetailScreenStyles from '../styles/ProductDetailScreenStyles'; // Importar los estilos
 
 const ProductDetailScreen = ({ route }) => {
     const { productId } = route.params; // Obtener el ID del producto
@@ -38,18 +39,18 @@ const ProductDetailScreen = ({ route }) => {
     };
 
     if (!product) {
-        return <Text style={styles.loadingText}>Cargando...</Text>;
+        return <Text style={ProductDetailScreenStyles.loadingText}>Cargando...</Text>;
     }
 
     return (
-        <View style={styles.container}>
+        <View style={ProductDetailScreenStyles.container}>
             <ScrollView>
-                <Image source={{ uri: product.image }} style={styles.image} />
-                <View style={styles.detailsContainer}>
-                    <Text style={styles.name}>{product.name}</Text>
-                    <Text style={styles.description}>{product.description}</Text>
-                    <Text style={styles.price}>${product.price}</Text>
-                    <View style={styles.buttonContainer}>
+                <Image source={{ uri: product.image }} style={ProductDetailScreenStyles.image} />
+                <View style={ProductDetailScreenStyles.detailsContainer}>
+                    <Text style={ProductDetailScreenStyles.name}>{product.name}</Text>
+                    <Text style={ProductDetailScreenStyles.description}>{product.description}</Text>
+                    <Text style={ProductDetailScreenStyles.price}>${product.price}</Text>
+                    <View style={ProductDetailScreenStyles.buttonContainer}>
                         <Button title="Agregar al carrito" onPress={handleAddToCart} color="#670000" />
                     </View>
                 </View>
@@ -57,70 +58,5 @@ const ProductDetailScreen = ({ route }) => {
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        alignContent: "center",
-        justifyContent: "center",
-        flex: 1,
-        backgroundColor: '#f5f5f5',
-        padding: 16,
-    },
-    image: {
-        alignSelf: "center",
-        width: 200,
-        height: 300,
-        borderRadius: 15,
-        marginBottom: 20,
-        borderWidth: 2,
-        borderColor: '#670000',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 5 },
-        shadowOpacity: 0.3,
-        shadowRadius: 10,
-    },
-    detailsContainer: {
-        backgroundColor: '#fff',
-        padding: 20,
-        borderRadius: 15,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 5 },
-        shadowOpacity: 0.3,
-        shadowRadius: 10,
-        elevation: 5,
-    },
-    name: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: '#333',
-        marginBottom: 10,
-        textAlign: 'center',
-    },
-    description: {
-        fontSize: 16,
-        color: '#555',
-        marginBottom: 20,
-        lineHeight: 24,
-        textAlign: 'center',
-    },
-    price: {
-        fontSize: 22,
-        fontWeight: 'bold',
-        color: '#4CAF50',
-        marginBottom: 20,
-        textAlign: 'center',
-    },
-    buttonContainer: {
-        marginTop: 10,
-        borderRadius: 10,
-        overflow: 'hidden',
-    },
-    loadingText: {
-        fontSize: 18,
-        color: '#333',
-        textAlign: 'center',
-        marginTop: 20,
-    },
-});
 
 export default ProductDetailScreen;

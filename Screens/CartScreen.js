@@ -1,14 +1,15 @@
-import React, { useContext } from 'react';
-import { View, Text, FlatList, Button, Alert, StyleSheet, Image } from 'react-native';
+import React, { useContext } from 'react'; 
+import { View, Text, FlatList, Button, Alert, Image } from 'react-native';
 import { agregarFactura } from '../utils/AgregarFactura'; // Asegúrate de que la ruta sea correcta
 import { CartContext } from '../context/cart-context'; // Importar el contexto del carrito
 import { AuthContext } from '../context/auth-context'; // Importar el contexto de autenticación
 import { useNavigation } from '@react-navigation/native';
+import CartScreenStyles from '../styles/CartScreenStyles'; // Importa los estilos
 
 const CartScreen = () => {
     const { cartItems, clearCart } = useContext(CartContext); // Obtener los productos del carrito y función para vaciarlo
     const { token } = useContext(AuthContext); // Obtener el token (usuario autenticado)
-    const Navigation=useNavigation()
+    const Navigation = useNavigation();
 
     const handlePurchase = async () => {
         try {
@@ -29,7 +30,7 @@ const CartScreen = () => {
             // Mostrar éxito y limpiar el carrito
             Alert.alert("Compra exitosa", "Tu factura ha sido generada.");
             clearCart();
-            Navigation.navigate("Factura")
+            Navigation.navigate("Factura");
 
         } catch (error) {
             console.error("Error al realizar la compra: ", error);
@@ -37,20 +38,20 @@ const CartScreen = () => {
         }
     };
 
-    const renderItem = ( item ) => {
+    const renderItem = (item) => {
         console.log(item.image); // Verifica que la URL sea válida.
         return (
-            <View style={styles.itemContainer}>
-                <Text style={styles.itemText}>{item.name}</Text>
-                <Text style={styles.itemPrice}>${item.price.toFixed(2)}</Text>
-                <Image source={{ uri: item.image }} style={styles.itemImage} />
+            <View style={CartScreenStyles.itemContainer}>
+                <Text style={CartScreenStyles.itemText}>{item.name}</Text>
+                <Text style={CartScreenStyles.itemPrice}>${item.price.toFixed(2)}</Text>
+                <Image source={{ uri: item.image }} style={CartScreenStyles.itemImage} />
             </View>
         );
     };
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Tu Carrito</Text>
+        <View style={CartScreenStyles.container}>
+            <Text style={CartScreenStyles.title}>Tu Carrito</Text>
             {cartItems.length > 0 ? (
                 <FlatList
                     data={cartItems}
@@ -58,53 +59,11 @@ const CartScreen = () => {
                     keyExtractor={(item) => item.id.toString()}
                 />
             ) : (
-                <Text style={styles.emptyText}>No hay productos en tu carrito.</Text>
+                <Text style={CartScreenStyles.emptyText}>No hay productos en tu carrito.</Text>
             )}
             <Button title="Confirmar Compra" onPress={handlePurchase} />
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 16,
-        backgroundColor: '#f5f5f5',
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 16,
-        textAlign: 'center',
-    },
-    itemContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingVertical: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#ddd',
-    },
-    itemText: {
-        fontSize: 18,
-        color: '#333',
-    },
-    itemPrice: {
-        fontSize: 18,
-        color: '#4CAF50',
-    },
-    emptyText: {
-        textAlign: 'center',
-        color: '#666',
-        fontSize: 16,
-        marginTop: 20,
-    },
-
-    itemImage: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
-        marginLeft: 10,
-    },
-});
 
 export default CartScreen;
