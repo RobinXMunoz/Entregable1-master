@@ -12,7 +12,7 @@ const ButtonComponent = ({ title, onClick }) => {
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: '#6200EE',
+        backgroundColor: '#790000',
         padding: 10,
         borderRadius: 5,
         alignItems: 'center',

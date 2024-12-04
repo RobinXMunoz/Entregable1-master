@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         height: 150,
         borderRadius: 10,
         borderWidth: 2,
-        borderColor: '#670000', // Color de borde
+        borderColor: '#790000', // Color de borde
     },
     name: {
         fontWeight: 'bold',
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     },
     price: {
         fontWeight: 'bold',
-        color: '#581845', // Color de Precio
+        color: '#1fff00', // Color de Precio
         fontSize: 16,
     },
 });

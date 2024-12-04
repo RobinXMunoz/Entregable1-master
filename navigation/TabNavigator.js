@@ -49,6 +49,15 @@ const TabNavigator = () => {
 
           return <Ionicons name={iconName} size={size} color={color} />;
         },
+
+        tabBarActiveTintColor: '#bb0000', // Color para los íconos activos
+        tabBarInactiveTintColor: 'gray', // Color para los íconos inactivos
+        tabBarStyle: {
+         backgroundColor: '#fff', // Fondo de la barra de navegación
+         height: 60, // Altura de la barra
+         paddingBottom: 10, // Espaciado inferior de los íconos
+  },
+
       })}
     >
       <Tab.Screen
