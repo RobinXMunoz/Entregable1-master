@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
-import { View, Text, FlatList, Button, Alert, StyleSheet } from 'react-native';
+import { View, Text, FlatList, Button, Alert, StyleSheet, Image } from 'react-native';
 import { agregarFactura } from '../utils/AgregarFactura'; // Asegúrate de que la ruta sea correcta
 import { CartContext } from '../context/cart-context'; // Importar el contexto del carrito
 import { AuthContext } from '../context/auth-context'; // Importar el contexto de autenticación
+import { useNavigation } from '@react-navigation/native';
 
 const CartScreen = () => {
     const { cartItems, clearCart } = useContext(CartContext); // Obtener los productos del carrito y función para vaciarlo
     const { token } = useContext(AuthContext); // Obtener el token (usuario autenticado)
+    const Navigation=useNavigation()
 
     const handlePurchase = async () => {
         try {
@@ -27,18 +29,24 @@ const CartScreen = () => {
             // Mostrar éxito y limpiar el carrito
             Alert.alert("Compra exitosa", "Tu factura ha sido generada.");
             clearCart();
+            Navigation.navigate("Factura")
+
         } catch (error) {
             console.error("Error al realizar la compra: ", error);
             Alert.alert("Error", "Hubo un problema al procesar tu compra.");
         }
     };
 
-    const renderItem = ({ item }) => (
-        <View style={styles.itemContainer}>
-            <Text style={styles.itemText}>{item.name}</Text>
-            <Text style={styles.itemPrice}>${item.price.toFixed(2)}</Text>
-        </View>
-    );
+    const renderItem = ( item ) => {
+        console.log(item.image); // Verifica que la URL sea válida.
+        return (
+            <View style={styles.itemContainer}>
+                <Text style={styles.itemText}>{item.name}</Text>
+                <Text style={styles.itemPrice}>${item.price.toFixed(2)}</Text>
+                <Image source={{ uri: item.image }} style={styles.itemImage} />
+            </View>
+        );
+    };
 
     return (
         <View style={styles.container}>
@@ -46,7 +54,7 @@ const CartScreen = () => {
             {cartItems.length > 0 ? (
                 <FlatList
                     data={cartItems}
-                    renderItem={renderItem}
+                    renderItem={({ item }) => renderItem(item)}
                     keyExtractor={(item) => item.id.toString()}
                 />
             ) : (
@@ -89,6 +97,13 @@ const styles = StyleSheet.create({
         color: '#666',
         fontSize: 16,
         marginTop: 20,
+    },
+
+    itemImage: {
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        marginLeft: 10,
     },
 });
 

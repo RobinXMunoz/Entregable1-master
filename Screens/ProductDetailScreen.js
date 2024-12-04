@@ -26,7 +26,7 @@ const ProductDetailScreen = ({ route }) => {
         if (product) {
             try {
                 await addCompra(product); // Agregar producto a Firebase
-                await AgregarFactura(authCtx.token.userId, product.id); // Registrar factura en Firebase
+                await AgregarFactura(authCtx.token.userId, product); // Registrar factura en Firebase
 
                 addToCart(product); // Agregar producto al contexto del carrito
                 Alert.alert("Producto agregado", `${product.name} ha sido agregado al carrito.`);

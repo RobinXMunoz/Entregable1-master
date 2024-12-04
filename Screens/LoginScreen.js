@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
 import { AuthContext } from '../context/auth-context'; // Importa el contexto de autenticación
-import { login } from '../utils/auth-context';
+import { login } from '../utils/auth';
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -13,11 +13,13 @@ const LoginScreen = ({ navigation }) => {
     console.log("try")
 
     try {
-      const token = await login(email, password); // llamamos la utilidad de autenticacion
+      const token = await login(email, password);
+      console.log(token) // llamamos la utilidad de autenticacion
       // si esta autenticacion tiene exito devuelve un token. El que devuelve esto es firebase
       //el cual le pasamos al contexto
 
-      authCtx.login(token); // el token se pasa al contexto de autenticacion y lo cargamos con la funcion de login
+      authCtx.login(token);
+       // el token se pasa al contexto de autenticacion y lo cargamos con la funcion de login
       // (por dentro de un setAuthToken(token))
 
       navigation.navigate('Home'); //si todo sale bien navegamos a la pantalla de MainTabs

@@ -1,40 +1,64 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, Text, Button, AsyncStorage, StyleSheet } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { AuthContext } from '../context/auth-context'; // Importar el contexto
-import { getAuth } from 'firebase/auth';
-import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AuthContext } from '../context/auth-context';
+import jwt_decode, { jwtDecode } from 'jwt-decode';
+import { useNavigation } from '@react-navigation/native';
 
-const ProfileScreen = ({ navigation }) => {
-  const { token, logout } = useContext(AuthContext); // Obtener el token y la función de logout
-  const [userEmail, setUserEmail] = useState('');
-  const auth = getAuth(); // Obtener la instancia de Firebase Authentication
+
+const ProfileScreen = () => {
+  const [email, setEmail] = useState('Cargando...');
+  const authContext = useContext(AuthContext);
+  const decoded=jwtDecode(authContext.token)
+  const navigation=useNavigation()
 
   useEffect(() => {
-    const getUserEmail = () => {
-      //const decode = jwtDecode(token)
-      console.log(token.token)
-      const decoded = jwtDecode(token.token)
-      console.log(decoded)
+    const fetchUserEmail = async () => {
+      try {
+        // Obtener el token almacenado en AsyncStorage
+       
+        
+    console.log(decoded)
+    setEmail(decoded.email)
+
+        // if (token) {
+        //   // Decodificar el token para obtener el correo
+        //   const decodedToken = jwt_decode(token);
+        //   console.log('Token decodificado:', decodedToken); // Verifica el token decodificado
+
+        //   if (decodedToken && decodedToken.email) {
+        //     setEmail(decodedToken.email);
+        //   } else {
+        //     setEmail('Correo no disponible');
+        //   }
+        // } else {
+        //   setEmail('Token no encontrado');
+        // }
+      } catch (error) {
+        console.error('Error al obtener el correo:', error);
+        setEmail('Error al obtener el correo');
+      }
     };
 
-    getUserEmail();
+    fetchUserEmail();
   }, []);
 
   const handleLogout = async () => {
-    await AsyncStorage.removeItem('authToken'); // Eliminar el token del almacenamiento
-    logout(); // Llamar a la función de logout del contexto
-    navigation.navigate('Login'); // Regresar al login
+    try {
+      // Eliminar el token de AsyncStorage
+      await AsyncStorage.removeItem('authToken');
+      authContext.logout(); // Cerrar sesión en el contexto de autenticación
+      navigation.replace("Login")
+      
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+    }
   };
 
-  return ( 
+  return (
     <View style={styles.container}>
-      <View style={styles.profileHeader}>
-        <Ionicons name="person-circle" size={200} color="#bb0000" />
-      </View>
-      <Text style={styles.text}>Token: {token.token}</Text>
-      <Button title="Cerrar sesión" onPress={handleLogout} />
+      <Text style={styles.text}>{email}</Text> {/* Mostrar el correo */}
+      <Button title="Cerrar sesión" onPress={handleLogout} /> {/* Botón de cerrar sesión */}
     </View>
   );
 };
@@ -44,15 +68,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  profileHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 10,
+    padding: 16,
   },
   text: {
     fontSize: 18,
-    marginVertical: 5,
+    marginBottom: 16,
   },
 });
 
