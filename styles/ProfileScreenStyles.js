@@ -7,9 +7,12 @@ const ProfileScreenStyles = StyleSheet.create({
     alignItems: 'center',
     padding: 16,
   },
+  iconContainer: {
+    marginBottom: 20, // Espaciado entre el ícono y el texto
+  },
   text: {
     fontSize: 18,
-    marginBottom: 16,
+    marginBottom: 8,
   },
 });
 
