@@ -43,16 +43,43 @@ const CartStyles = StyleSheet.create({
         marginTop: 10,
         borderRadius: 10,
         overflow: 'hidden',
-        width: '20%', // Cambiar el ancho del botón según sea necesario
-        alignSelf: 'center', // Centrar el botón horizontalmente
-        backgroundColor: '#790000', // Fondo del botón
-        paddingVertical: 10, // Altura del botón
+        width: '60%', 
+        alignSelf: 'center', 
+        backgroundColor: '#790000', 
+        paddingVertical: 10,
     },
     buttonText: {
-        color: '#fff', // Color del texto
+        color: '#fff', 
         textAlign: 'center',
         fontWeight: 'bold',
         fontSize: 16,
+    },
+    // Nuevo estilo para el botón de "Eliminar"
+    removeButton: {
+        backgroundColor: '#f44336', // Rojo
+        paddingVertical: 6,
+        paddingHorizontal: 12,
+        borderRadius: 5,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 8,
+    },
+    removeButtonText: {
+        color: '#fff',
+        fontSize: 14,
+    },
+    
+    clearCartButton: {
+        backgroundColor: '#ff9800', 
+        paddingVertical: 12,
+        marginTop: 20,
+        borderRadius: 5,
+        alignItems: 'center',
+    },
+    clearCartButtonText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold',
     },
 });
 

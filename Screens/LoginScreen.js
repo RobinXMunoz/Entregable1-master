@@ -10,15 +10,13 @@ const LoginScreen = ({ navigation }) => {
   const authCtx = useContext(AuthContext);
 
   const handleLogin = async () => {
-    console.log("try");
-
     try {
       const token = await login(email, password);
-      console.log(token); // Llamamos la utilidad de autenticación
+      
 
-      authCtx.login(token); // Pasamos el token al contexto de autenticación
+      authCtx.login(token); 
 
-      navigation.navigate('Home'); // Si todo sale bien, navegamos a la pantalla principal
+      navigation.navigate('Home'); 
     } catch (error) {
       Alert.alert('Error', 'Login failed. Please try again.');
     }

@@ -56,15 +56,25 @@ const ProductDetailScreenStyles = StyleSheet.create({
         marginTop: 10,
         borderRadius: 10,
         overflow: 'hidden',
-        width: '20%', // Cambiar el ancho del botón a un porcentaje
-        alignSelf: 'center', // Centrar el botón horizontalmente
+        width: '60%', 
+        alignSelf: 'center', 
+        backgroundColor: '#790000',
     },
+    
+    buttonText: {
+        fontSize: 18,
+        color: 'black', 
+        textAlign: 'center',
+        padding: 10, 
+    },
+    
     loadingText: {
         fontSize: 18,
-        color: '#333',
+        color: '#fff',
         textAlign: 'center',
         marginTop: 20,
     },
+    
 });
 
 export default ProductDetailScreenStyles;

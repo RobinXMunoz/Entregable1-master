@@ -7,10 +7,11 @@ import { useNavigation } from '@react-navigation/native';
 import CartStyles from '../styles/CartStyles'; 
 
 const CartScreen = () => {
-    const { cartItems, clearCart } = useContext(CartContext);  // Obtén los productos del carrito y la función para vaciarlo
-    const { token } = useContext(AuthContext);  // Obtén el token (usuario autenticado)
-    const navigation = useNavigation();  // Hook de navegación
+    const { cartItems, clearCart, removeFromCart } = useContext(CartContext);  // Agregamos la función removeFromCart
+    const { token } = useContext(AuthContext);  
+    const navigation = useNavigation();  
 
+    
     const handlePurchase = async () => {
         try {
             if (cartItems.length === 0) {
@@ -18,26 +19,39 @@ const CartScreen = () => {
                 return;
             }
 
-            if (!token || !token.userId) {
+            if (!token ) {
+                
                 Alert.alert("Error de autenticación", "Debes iniciar sesión para realizar una compra.");
                 return;
-            }
+            } 
+            cartItems.forEach(async (element) => {
+                await agregarFactura(token.userId,element)
+              });
 
-            // Generar la factura con los productos del carrito
-            const productIds = cartItems.map((item) => item.id);
-            await agregarFactura(token.userId, productIds);
-
-            // Mostrar mensaje de éxito y limpiar el carrito
             Alert.alert("Compra exitosa", "Tu factura ha sido generada.");
             clearCart();
 
-            // Navegar a la pantalla de factura
-            navigation.navigate("FacturaScreen");  // Redirige a la pantalla de factura
-
+            
         } catch (error) {
             console.error("Error al realizar la compra: ", error);
             Alert.alert("Error", "Hubo un problema al procesar tu compra.");
         }
+    };
+
+    const handleRemoveItem = (itemId) => {
+        removeFromCart(itemId);
+    };
+
+   
+    const handleClearCart = () => {
+        Alert.alert(
+            "Vaciar el carrito",
+            "¿Estás seguro de que deseas eliminar todos los productos del carrito?",
+            [
+                { text: "Cancelar", style: "cancel" },
+                { text: "Eliminar todo", onPress: clearCart },
+            ]
+        );
     };
 
     const renderItem = ({ item }) => (
@@ -45,6 +59,12 @@ const CartScreen = () => {
             <Text style={CartStyles.itemText}>{item.name}</Text>
             <Text style={CartStyles.itemPrice}>${item.price.toFixed(2)}</Text>
             <Image source={{ uri: item.image }} style={CartStyles.itemImage} />
+            <TouchableOpacity 
+                style={CartStyles.removeButton} 
+                onPress={() => handleRemoveItem(item.id)}
+            >
+                <Text style={CartStyles.removeButtonText}>Eliminar</Text>
+            </TouchableOpacity>
         </View>
     );
 
@@ -64,7 +84,13 @@ const CartScreen = () => {
                 style={CartStyles.buttonContainer} 
                 onPress={handlePurchase}
             >
-                <Text style={CartStyles.buttonText}>$ Confirmar Compra $</Text>
+            <Text style={CartStyles.buttonText}>Confirmar Compra</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+                style={CartStyles.clearCartButton} 
+                onPress={handleClearCart}
+            >
+            <Text style={CartStyles.clearCartButtonText}>Vaciar carrito</Text>
             </TouchableOpacity>
         </View>
     );

@@ -236,7 +236,7 @@ const uploadDataToFirebase = async () => {
                 'https://prueba-bebida-default-rtdb.firebaseio.com/products.json',
                 product
             );
-            console.log('Producto subido:', response.data);
+            
         }
     } catch (error) {
         console.error('Error subiendo el producto', error);

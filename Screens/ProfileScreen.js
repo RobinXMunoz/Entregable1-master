@@ -16,7 +16,7 @@ const ProfileScreen = () => {
   useEffect(() => {
     const fetchUserEmail = async () => {
       try {
-        console.log(decoded);
+       
         setEmail(decoded.email);
       } catch (error) {
         console.error('Error al obtener el correo:', error);
@@ -29,9 +29,8 @@ const ProfileScreen = () => {
 
   const handleLogout = async () => {
     try {
-      // Eliminar el token de AsyncStorage
       await AsyncStorage.removeItem('authToken');
-      authContext.logout(); // Cerrar sesión en el contexto de autenticación
+      authContext.logout(); 
       navigation.replace("Login");
     } catch (error) {
       console.error('Error al cerrar sesión:', error);
@@ -41,10 +40,10 @@ const ProfileScreen = () => {
   return (
     <View style={ProfileScreenStyles.container}>
       <View style={ProfileScreenStyles.iconContainer}>
-        <Ionicons name="person-circle" size={100} color="#670000" /> {/* Icono de perfil */}
+        <Ionicons name="person-circle" size={100} color="#670000" /> 
       </View>
-      <Text style={ProfileScreenStyles.text}>{email}</Text> {/* Mostrar el correo */}
-      <Button title="Cerrar Sesión ✘" onPress={handleLogout} color="#670000" /> {/* Botón de cerrar sesión */}
+      <Text style={ProfileScreenStyles.text}>{email}</Text> 
+      <Button title="Cerrar Sesión ✘" onPress={handleLogout} color='black' />
     </View>
   );
 };

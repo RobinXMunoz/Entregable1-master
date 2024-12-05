@@ -8,12 +8,13 @@ const ProfileScreenStyles = StyleSheet.create({
     padding: 16,
   },
   iconContainer: {
-    marginBottom: 20, // Espaciado entre el ícono y el texto
+    marginBottom: 20, 
   },
   text: {
     fontSize: 18,
     marginBottom: 8,
   },
+  
 });
 
 export default ProfileScreenStyles;

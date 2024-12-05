@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, FlatList, Image } from "react-native";
 import { getFactura } from "../utils/Uploadbebidas";
-import FacturaScreenStyles from "../styles/FacturaScreenStyles"; // Importa los estilos
+import FacturaScreenStyles from "../styles/FacturaScreenStyles"; // Importa tus estilos desde el archivo externo
 
 const FacturaScreen = () => {
     const [factura, setFactura] = useState([]);
-    const [loading, setLoading] = useState(true); // Estado para controlar la carga.
-    const [error, setError] = useState(null); // Estado para manejar errores.
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         async function fetchData() {
             try {
                 const listData = await getFactura();
                 setFactura(listData);
-                console.log(listData);
-                listData.forEach(async (element) => {
-                    factura.push(element);
-                });
-                console.log(factura);
             } catch (err) {
                 console.error("Error al obtener la factura:", err);
                 setError("No se pudieron cargar los datos");
@@ -28,7 +23,6 @@ const FacturaScreen = () => {
         fetchData();
     }, []);
 
-    // Mostrar mensaje de carga o error si corresponde.
     if (loading) {
         return <Text style={FacturaScreenStyles.text}>Cargando...</Text>;
     }
@@ -44,17 +38,35 @@ const FacturaScreen = () => {
                 <Text style={FacturaScreenStyles.title}>{item.producto.name}</Text>
                 <Text style={FacturaScreenStyles.description}>{item.producto.description}</Text>
                 <Text style={FacturaScreenStyles.category}>{item.producto.category}</Text>
+                <Text style={FacturaScreenStyles.price}>Precio: ${item.producto.price}</Text>
             </View>
         </View>
     );
 
+    const calculateTotal = () => {
+        return factura.reduce((sum, item) => sum + item.producto.price, 0).toFixed(2);
+    };
+
     return (
-        <FlatList
-            data={factura}
-            keyExtractor={(item) => item.id}
-            renderItem={renderFactura}
-            contentContainerStyle={FacturaScreenStyles.listContainer}
-        />
+        <View style={FacturaScreenStyles.container}>
+           
+            <View style={FacturaScreenStyles.header}>
+                <Text style={FacturaScreenStyles.headerText}>Factura</Text>
+                <Text style={FacturaScreenStyles.headerDetails}>Número: #001234</Text>
+                <Text style={FacturaScreenStyles.headerDetails}>Fecha: {new Date().toLocaleDateString()}</Text>
+            </View>
+
+            <FlatList
+                data={factura}
+                keyExtractor={(item) => item.id}
+                renderItem={renderFactura}
+                contentContainerStyle={FacturaScreenStyles.listContainer}
+            />
+
+            <View style={FacturaScreenStyles.totalContainer}>
+                <Text style={FacturaScreenStyles.totalText}>Total: ${calculateTotal()}</Text>
+            </View>
+        </View>
     );
 };
 

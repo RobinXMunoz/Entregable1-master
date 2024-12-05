@@ -12,7 +12,6 @@ const AppNavigator = () => {
   const authCtx = useContext(AuthContext);
 
   if (authCtx.isLoading) {
-    // Muestra un indicador de carga mientras se verifica el token
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <ActivityIndicator size="large" color="#0000ff" />
@@ -23,17 +22,17 @@ const AppNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName={authCtx.isLogged ? "Home" : "Login"}>
-        {/* Pantalla de inicio de sesión */}
+    
         <Stack.Screen
           name="Login"
           component={LoginScreen}
-          options={{ headerShown: false }} // Ocultar el header en el login
+          options={{ headerShown: false }} 
         />
-        {/* Pantalla principal cuando el usuario está autenticado */}
+        
         <Stack.Screen
           name="Home"
           component={TabNavigator}
-          options={{ headerShown: false }} // Ocultar el header en el TabNavigator
+          options={{ headerShown: false }} 
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -4,14 +4,14 @@ import { getBebidas } from '../utils/Uploadbebidas';
 import addCompra from '../utils/post-data';
 import AgregarFactura from '../utils/AgregarFactura';
 import { AuthContext } from '../context/auth-context';
-import { CartContext } from '../context/cart-context'; // Importar CartContext
-import ProductDetailScreenStyles from '../styles/ProductDetailScreenStyles'; // Importar los estilos
+import { CartContext } from '../context/cart-context'; 
+import ProductDetailScreenStyles from '../styles/ProductDetailScreenStyles'; 
 
 const ProductDetailScreen = ({ route }) => {
-    const { productId } = route.params; // Obtener el ID del producto
+    const { productId } = route.params; 
     const [product, setProduct] = useState(null);
     const authCtx = useContext(AuthContext);
-    const { addToCart } = useContext(CartContext); // Usar función del contexto del carrito
+    const { addToCart } = useContext(CartContext); 
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -21,15 +21,13 @@ const ProductDetailScreen = ({ route }) => {
         };
 
         fetchProduct();
-    }, [productId]);  // Solo vuelve a ejecutar si el productId cambia
+    }, [productId]);  
 
     const handleAddToCart = async () => {
         if (product) {
             try {
-                await addCompra(product); // Agregar producto a Firebase
-                await AgregarFactura(authCtx.token.userId, product); // Registrar factura en Firebase
-
-                addToCart(product); // Agregar producto al contexto del carrito
+                await addCompra(product); 
+                addToCart(product); 
                 Alert.alert("Producto agregado", `${product.name} ha sido agregado al carrito.`);
             } catch (error) {
                 console.error("Error al agregar al carrito: ", error);
@@ -51,7 +49,7 @@ const ProductDetailScreen = ({ route }) => {
                     <Text style={ProductDetailScreenStyles.description}>{product.description}</Text>
                     <Text style={ProductDetailScreenStyles.price}>${product.price}</Text>
                     <View style={ProductDetailScreenStyles.buttonContainer}>
-                        <Button title="Agregar al Carrito ➤" onPress={handleAddToCart} color="#670000" />
+                        <Button title="Agregar al Carrito ➤" onPress={handleAddToCart} color='white' />
                     </View>
                 </View>
             </ScrollView>

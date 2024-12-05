@@ -22,7 +22,7 @@ const SearchScreen = ({ navigation }) => {
                     setProducts(productList);
                     setFilteredResults(productList); // Mostrar todos inicialmente
                 } else {
-                    console.log('No se encontraron productos.');
+                    Alert.alert('No se encontraron productos.');
                 }
             });
         };
