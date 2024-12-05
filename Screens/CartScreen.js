@@ -5,6 +5,7 @@ import { CartContext } from '../context/cart-context';
 import { AuthContext } from '../context/auth-context'; 
 import { useNavigation } from '@react-navigation/native'; 
 import CartStyles from '../styles/CartStyles'; 
+import { FormattedMessage } from 'react-intl';
 
 const CartScreen = () => {
     const { cartItems, clearCart, removeFromCart } = useContext(CartContext);  // Agregamos la función removeFromCart
@@ -70,7 +71,7 @@ const CartScreen = () => {
 
     return (
         <View style={CartStyles.container}>
-            <Text style={CartStyles.title}>Tu Carrito</Text>
+            <Text style={CartStyles.title}><FormattedMessage id='tuCarrito'/></Text>
             {cartItems.length > 0 ? (
                 <FlatList
                     data={cartItems}
@@ -78,19 +79,19 @@ const CartScreen = () => {
                     keyExtractor={(item) => item.id.toString()}
                 />
             ) : (
-                <Text style={CartStyles.emptyText}>No hay productos en tu carrito.</Text>
+                <Text style={CartStyles.emptyText}><FormattedMessage id='noProductos'/> </Text>
             )}
             <TouchableOpacity 
                 style={CartStyles.buttonContainer} 
                 onPress={handlePurchase}
             >
-            <Text style={CartStyles.buttonText}>Confirmar Compra</Text>
+            <Text style={CartStyles.buttonText}><FormattedMessage id='confirmarCompra'/></Text>
             </TouchableOpacity>
             <TouchableOpacity 
                 style={CartStyles.clearCartButton} 
                 onPress={handleClearCart}
             >
-            <Text style={CartStyles.clearCartButtonText}>Vaciar carrito</Text>
+            <Text style={CartStyles.clearCartButtonText}><FormattedMessage id='vaciarCarrito'/></Text>
             </TouchableOpacity>
         </View>
     );

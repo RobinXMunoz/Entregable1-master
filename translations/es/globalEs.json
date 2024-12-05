@@ -1,4 +1,16 @@
 {
     "Hola":"Hola",
-    "precio":"precio"
+    "precio":"precio",
+       "categories.Jugos": "Jugos",
+  "categories.Gaseosas": "Gaseosas",
+  "categories.Bajo en Azúcar": "Bajo en azúcar",
+  "categories.Cafeína y Energizantes": "Cafeína",
+  "categories.Frío": "Frío",
+  "categories.Lácteos": "Lácteos",
+  "noProductos": "No hay productos en tu carrito",
+  "confirmarCompra": "Confirmar Compra",
+  "vaciarCarrito": "Vaciar Carrito",
+  "tuCarrito": "Tu Carrito"
 }
+
+      

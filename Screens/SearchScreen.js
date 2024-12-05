@@ -3,6 +3,7 @@ import { View, TextInput, FlatList, Text, TouchableOpacity, Image } from 'react-
 import { ref, onValue } from 'firebase/database';
 import { database } from '../Firebase/firebase';
 import SearchScreenStyles from '../styles/SearchScreenStyles'; // Importa los estilos
+import { FormattedMessage } from 'react-intl';
 
 const SearchScreen = ({ navigation }) => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -22,7 +23,7 @@ const SearchScreen = ({ navigation }) => {
                     setProducts(productList);
                     setFilteredResults(productList); // Mostrar todos inicialmente
                 } else {
-                    Alert.alert('No se encontraron productos.');
+                    console.log('No se encontraron productos.');
                 }
             });
         };
@@ -52,7 +53,7 @@ const SearchScreen = ({ navigation }) => {
             <Image source={{ uri: item.image }} style={SearchScreenStyles.productImage} />
             <View style={SearchScreenStyles.productInfo}>
                 <Text style={SearchScreenStyles.productName}>{item.name}</Text>
-                <Text style={SearchScreenStyles.productCategory}>{item.category}</Text>
+                <Text style={SearchScreenStyles.productCategory}><FormattedMessage id={`categories.${item.category}`} /></Text>
             </View>
         </TouchableOpacity>
     );
@@ -62,7 +63,7 @@ const SearchScreen = ({ navigation }) => {
             <View style={SearchScreenStyles.searchBarContainer}>
                 <TextInput
                     style={SearchScreenStyles.searchInput}
-                    placeholder="🔍︎ Buscar productos o categorías..." 
+                    placeholder="🔍︎ Buscar Productos o Categorías..." 
                     placeholderTextColor="#a2a2a2" // Cambia el color del texto aquí
                     value={searchQuery}
                     onChangeText={handleSearch}

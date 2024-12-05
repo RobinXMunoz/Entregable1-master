@@ -40,7 +40,7 @@ const CatalogScreen = ({ navigation }) => {
             </TouchableOpacity>
             {Object.keys(groupedProducts).map((category) => (
                 <View key={category} style={CatalogStyles.categoryContainer}>
-                    <Text style={CatalogStyles.categoryTitle}>{category}</Text>
+                    <Text style={CatalogStyles.categoryTitle}><FormattedMessage id={`categories.${category}`} defaultMessage={category} /></Text>
                     <FlatList
                         data={groupedProducts[category]}
                         horizontal

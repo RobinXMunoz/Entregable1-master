@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AuthContext } from '../context/auth-context';
+import { AuthContext } from './context/auth-context';
 import jwt_decode, { jwtDecode } from 'jwt-decode';
 import { useNavigation } from '@react-navigation/native';
-import ProfileScreenStyles from '../styles/ProfileScreenStyles'; // Importar los estilos
+import ProfileScreenStyles from './styles/ProfileScreenStyles'; // Importar los estilos
 import { Ionicons } from 'react-native-vector-icons'; // Importar Ionicons
 
 const ProfileScreen = () => {

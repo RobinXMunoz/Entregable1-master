@@ -1,4 +1,14 @@
 {
     "Hola":"Hello",
-    "precio":"price"
+    "precio":"price",
+       "categories.Jugos": "Juices",
+  "categories.Gaseosas": "Sodas",
+  "categories.Bajo en Azúcar": "Low Sugar",
+  "categories.Cafeína y Energizantes": "Caffeine",
+  "categories.Frío": "Cold",
+  "categories.Lácteos": "Dairy",
+  "noProductos": "There isn't products in your cart",
+  "confirmarCompra": "Confirm Purchase",
+  "vaciarCarrito": "Empty Cart",
+  "tuCarrito": "Your Cart"
 }
