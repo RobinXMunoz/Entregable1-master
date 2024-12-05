@@ -7,7 +7,7 @@ import { View,Text } from 'react-native';
 
 import CatalogScreen from '../Screens/CatalogScreen';
 import ProductDetailScreen from '../Screens/ProductDetailScreen';
-import ProfileScreen from '../ProfileScreen';
+import ProfileScreen from '../Screens/ProfileScreen';
 import SearchScreen from '../Screens/SearchScreen';
 import CartScreen from '../Screens/CartScreen';
 import FacturaScreen from '../Screens/FacturaScreen';
