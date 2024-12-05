@@ -31,16 +31,28 @@ const CatalogScreen = ({ navigation }) => {
 
     return (
         <ScrollView style={CatalogStyles.container}>
-            <Text><FormattedMessage id='Hola' /></Text>
-            <TouchableOpacity onPress={() => setLocale('es')}>
-                <Text>Español</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => setLocale('en')}>
-                <Text>English</Text>
-            </TouchableOpacity>
+            {/* Contenedor estilizado para cambio de idiomas */}
+            <View style={CatalogStyles.languageContainer}>
+                <TouchableOpacity
+                    style={CatalogStyles.languageButton}
+                    onPress={() => setLocale('es')}
+                >
+                    <Text style={CatalogStyles.languageButtonText}>Español</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={CatalogStyles.languageButton}
+                    onPress={() => setLocale('en')}
+                >
+                    <Text style={CatalogStyles.languageButtonText}>English</Text>
+                </TouchableOpacity>
+            </View>
+
+            {/* Listado de productos agrupados por categorías */}
             {Object.keys(groupedProducts).map((category) => (
                 <View key={category} style={CatalogStyles.categoryContainer}>
-                    <Text style={CatalogStyles.categoryTitle}><FormattedMessage id={`categories.${category}`} defaultMessage={category} /></Text>
+                    <Text style={CatalogStyles.categoryTitle}>
+                        <FormattedMessage id={`categories.${category}`} defaultMessage={category} />
+                    </Text>
                     <FlatList
                         data={groupedProducts[category]}
                         horizontal
