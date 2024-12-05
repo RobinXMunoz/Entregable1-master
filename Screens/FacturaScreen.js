@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Text, View, FlatList, Image } from "react-native";
 import { getFactura } from "../utils/Uploadbebidas";
 import FacturaScreenStyles from "../styles/FacturaScreenStyles"; // Importa tus estilos desde el archivo externo
+import { FormattedMessage } from "react-intl";
 
 const FacturaScreen = () => {
     const [factura, setFactura] = useState([]);
@@ -38,7 +39,7 @@ const FacturaScreen = () => {
                 <Text style={FacturaScreenStyles.title}>{item.producto.name}</Text>
                 <Text style={FacturaScreenStyles.description}>{item.producto.description}</Text>
                 <Text style={FacturaScreenStyles.category}>{item.producto.category}</Text>
-                <Text style={FacturaScreenStyles.price}>Precio: ${item.producto.price}</Text>
+                <Text style={FacturaScreenStyles.price}><FormattedMessage id="precio" />: ${item.producto.price}</Text>
             </View>
         </View>
     );

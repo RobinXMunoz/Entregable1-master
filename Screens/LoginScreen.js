@@ -12,8 +12,6 @@ const LoginScreen = ({ navigation }) => {
   const handleLogin = async () => {
     try {
       const token = await login(email, password);
-      
-
       authCtx.login(token); 
 
       navigation.navigate('Home'); 
